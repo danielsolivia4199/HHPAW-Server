@@ -1,0 +1,26 @@
+[
+  {
+      "model": "hhpawapi.item",
+      "pk": 1,
+      "fields": {
+          "name": "Cheese Pizza",
+          "price": 10
+      }
+  },
+  {
+      "model": "hhpawapi.item",
+      "pk": 2,
+      "fields": {
+          "name": "Pepperoni Pizza",
+          "price": 12
+      }
+  },
+  {
+      "model": "hhpawapi.item",
+      "pk": 3,
+      "fields": {
+          "name": "Veggie Pizza",
+          "price": 12
+      }
+  }
+]
