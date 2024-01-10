@@ -1,0 +1,13 @@
+[
+  {
+      "model": "hhpawapi.revenue",
+      "pk": 1,
+      "fields": {
+          "order": 2,
+          "order_amount": "15.99",
+          "tip_amount": "3.99",
+          "payment_type": "Credit Card",
+          "date": "2024-1-01 04:30:31"
+      }
+  }
+]

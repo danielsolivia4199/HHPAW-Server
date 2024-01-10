@@ -1,0 +1,26 @@
+[
+  {
+      "model": "hhpawapi.order",
+      "pk": 1,
+      "fields": {
+          "employee": 1,
+          "customer_name": "Harry Smith",
+          "customer_email": "hsmith89@gmail.com",
+          "customer_phone": "823-345-4857",
+          "order_type": "In-Person",
+          "is_closed": "False"
+      }
+  },
+  {
+      "model": "hhpawapi.order",
+      "pk": 2,
+      "fields": {
+          "employee": 1,
+          "customer_name": "Greta Jones",
+          "customer_email": "gretajh@gmail.com",
+          "customer_phone": "853-545-4677",
+          "order_type": "Mobile",
+          "is_closed": "True"
+      }
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+      "model": "hhpawapi.employee",
+      "pk": 1,
+      "fields": {
+          "uid": 1,
+          "name": "Sarah Jones"
+      }
+  },
+  {
+      "model": "hhpawapi.employee",
+      "pk": 2,
+      "fields": {
+          "uid": 2,
+          "name": "Ben Frank"
+      }
+  }
+]
