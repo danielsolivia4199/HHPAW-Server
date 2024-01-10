@@ -3,7 +3,7 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from hhpawapi.models import Order
+from hhpawapi.models import Order, Employee
 
 class OrderView(ViewSet):
     """HHPAW orders view"""
@@ -21,6 +21,25 @@ class OrderView(ViewSet):
         """Handle GET requests to get all items"""
         orders = Order.objects.all()
         serializer = OrderSerializer(orders, many=True)
+        return Response(serializer.data)
+    
+    def create(self, request):
+        """Handle POST operations
+
+        Returns
+            Response -- JSON serialized order instance
+        """
+        employee = Employee.objects.get(uid=request.data["employee"])
+        
+        order = Order.objects.create(
+            customer_name=request.data["customerName"],
+            customer_email=request.data["customerEmail"],
+            customer_phone=request.data["customerPhone"],
+            order_type=request.data["orderType"],
+            is_closed=request.data["isClosed"],
+            employee=employee,
+        )
+        serializer = OrderSerializer(order)
         return Response(serializer.data)
 class OrderSerializer(serializers.ModelSerializer):
     """JSON serializer for game types
