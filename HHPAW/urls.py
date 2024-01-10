@@ -18,12 +18,17 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
-from hhpawapi.views import ItemView
+from hhpawapi.views import ItemView, OrderView, RevenueView, check_user, register_user, OrderItemView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'items', ItemView, 'item')
+router.register(r'orders', OrderView, 'order')
+router.register(r'revenues', RevenueView, 'revenue')
+router.register(r'orderitems', OrderItemView, 'orderitem')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
+    path('checkuser', check_user),
+    path('registeruser', register_user)
 ]
