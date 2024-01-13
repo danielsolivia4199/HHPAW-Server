@@ -44,8 +44,8 @@ class OrderItemView(ViewSet):
 
     def create(self, request):
         try:
-            order = get_object_or_404(Order, pk=request.data["order"])
-            item = get_object_or_404(Item, pk=request.data["item"])          
+            order = get_object_or_404(Order, pk=request.data["order_id"])
+            item = get_object_or_404(Item, pk=request.data["item_id"])          
             order_item = OrderItem.objects.create(order=order, item=item)
             serializer = OrderItemSerializer(order_item)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
