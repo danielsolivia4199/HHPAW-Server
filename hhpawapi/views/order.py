@@ -57,6 +57,16 @@ class OrderView(ViewSet):
 
         order.save()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
+    
+    def destroy(self, request, pk):
+        """Handle DESTROY requests for order
+
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+        order = Order.objects.get(pk=pk)
+        order.delete()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
 
 
 class OrderSerializer(serializers.ModelSerializer):
