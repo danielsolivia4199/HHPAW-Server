@@ -1,4 +1,4 @@
-"""View module for handling requests about orders"""
+"""View module for handling requests about revenue"""
 from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
@@ -22,6 +22,19 @@ class RevenueView(ViewSet):
         revenues = Revenue.objects.all()
         serializer = RevenueSerializer(revenues, many=True)
         return Response(serializer.data)
+    
+    def create(self, request):
+        """Handle POST operations to create a Revenue record
+
+        Returns:
+            Response -- JSON serialized Revenue instance
+        """
+        serializer = RevenueSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)   
 class RevenueSerializer(serializers.ModelSerializer):
     """JSON serializer for revenue
     """

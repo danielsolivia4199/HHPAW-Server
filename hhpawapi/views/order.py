@@ -4,6 +4,8 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from hhpawapi.models import Order, Employee
+from rest_framework.decorators import action
+
 
 
 class OrderView(ViewSet):
@@ -50,10 +52,10 @@ class OrderView(ViewSet):
             Response -- Empty body with 204 status code
         """
         order = Order.objects.get(pk=pk)
-        order.customer_name = request.data["customerName"]
-        order.customer_email = request.data["customerEmail"]
-        order.customer_phone = request.data["customerPhone"]
-        order.order_type = request.data["orderType"]
+        order.customer_name = request.data.get("customerName", order.customer_name)
+        order.customer_email = request.data.get("customerEmail", order.customer_email)
+        order.customer_phone = request.data.get("customerPhone", order.customer_phone)
+        order.order_type = request.data.get("orderType", order.order_type)
 
         order.save()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
@@ -67,6 +69,14 @@ class OrderView(ViewSet):
         order = Order.objects.get(pk=pk)
         order.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
+    
+    @action(detail=True, methods=['PATCH'])
+    def close_order(self, request, pk=None):
+        """Custom action to close an order."""
+        order = Order.objects.get(pk=pk)
+        order.is_closed = True
+        order.save()
+        return Response({'status': 'order closed'}, status=status.HTTP_200_OK)
 
 
 class OrderSerializer(serializers.ModelSerializer):

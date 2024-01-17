@@ -6,5 +6,5 @@ class Revenue(models.Model):
     order_amount = models.DecimalField(max_digits=5, decimal_places=2)
     tip_amount = models.DecimalField(max_digits=5, decimal_places=2)
     payment_type = models.CharField(max_length=50)
-    date = models.DateTimeField(auto_now=False)
+    date = models.DateField(auto_now=False)
     
