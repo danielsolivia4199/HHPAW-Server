@@ -69,7 +69,7 @@ class OrderView(ViewSet):
         order = Order.objects.get(pk=pk)
         order.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
-    
+  
     @action(detail=True, methods=['PATCH'])
     def close_order(self, request, pk=None):
         """Custom action to close an order."""

@@ -34,7 +34,22 @@ class RevenueView(ViewSet):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)   
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+    def destroy(self, request, pk):
+        """
+        Handle DELETE requests for a single revenue record
+        Returns:
+            Response -- 200, 404, or 500 status code
+        """
+        try:
+            revenue = Revenue.objects.get(pk=pk)
+            revenue.delete()
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+        except Revenue.DoesNotExist:
+            return Response({'message': 'Revenue not found.'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as ex:
+            return HttpResponseServerError(ex)  
 class RevenueSerializer(serializers.ModelSerializer):
     """JSON serializer for revenue
     """
