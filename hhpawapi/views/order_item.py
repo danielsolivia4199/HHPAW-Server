@@ -51,6 +51,21 @@ class OrderItemView(ViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except ValidationError as e:
             return Response({'message': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    
+    def destroy(self, request, pk=None):
+        """
+        Handle DELETE requests for a single order item
+        Args:
+            pk (int): Primary key of the order item to be deleted
+        Returns:
+            Response -- HTTP status code
+        """
+        try:
+            order_item = get_object_or_404(OrderItem, pk=pk)
+            order_item.delete()
+            return Response({'message': 'Order item deleted'}, status=status.HTTP_204_NO_CONTENT)
+        except Exception as e:
+            return Response({'message': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 class OrderItemSerializer(serializers.ModelSerializer):
     """JSON serializer for game types
