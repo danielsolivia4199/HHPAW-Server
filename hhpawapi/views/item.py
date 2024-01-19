@@ -22,6 +22,20 @@ class ItemView(ViewSet):
         items = Item.objects.all()
         serializer = ItemSerializer(items, many=True)
         return Response(serializer.data)
+    
+    def create(self, request):
+        """Handle POST operations
+
+        Returns
+            Response -- JSON serialized item instance
+        """
+        item = Item.objects.create(
+            name=request.data["name"],
+            price=request.data["price"],
+        )
+        serializer = ItemSerializer(item)
+        return Response(serializer.data)
+    
 class ItemSerializer(serializers.ModelSerializer):
     """JSON serializer for game types
     """
